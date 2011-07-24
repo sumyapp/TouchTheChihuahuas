@@ -1,0 +1,288 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ACED19BF13DC444C0004D01E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACED19BE13DC444C0004D01E /* UIKit.framework */; };
+		ACED19C113DC444C0004D01E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACED19C013DC444C0004D01E /* Foundation.framework */; };
+		ACED19C313DC444C0004D01E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACED19C213DC444C0004D01E /* CoreGraphics.framework */; };
+		ACED19C913DC444C0004D01E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACED19C713DC444C0004D01E /* InfoPlist.strings */; };
+		ACED19CB13DC444C0004D01E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ACED19CA13DC444C0004D01E /* main.m */; };
+		ACED19CF13DC444C0004D01E /* TouchTheDroidsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACED19CE13DC444C0004D01E /* TouchTheDroidsAppDelegate.m */; };
+		ACED19D213DC444C0004D01E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACED19D013DC444C0004D01E /* MainWindow.xib */; };
+		ACED19D513DC444C0004D01E /* TouchTheDroidsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACED19D413DC444C0004D01E /* TouchTheDroidsViewController.m */; };
+		ACED19D813DC444C0004D01E /* TouchTheDroidsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACED19D613DC444C0004D01E /* TouchTheDroidsViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ACED19BA13DC444C0004D01E /* TouchTheDroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchTheDroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACED19BE13DC444C0004D01E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ACED19C013DC444C0004D01E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ACED19C213DC444C0004D01E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ACED19C613DC444C0004D01E /* TouchTheDroids-Info.plist */ = {isa = PBXFileReference; path = "TouchTheDroids-Info.plist"; sourceTree = "<group>"; };
+		ACED19C813DC444C0004D01E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ACED19CA13DC444C0004D01E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ACED19CC13DC444C0004D01E /* TouchTheDroids-Prefix.pch */ = {isa = PBXFileReference; path = "TouchTheDroids-Prefix.pch"; sourceTree = "<group>"; };
+		ACED19CD13DC444C0004D01E /* TouchTheDroidsAppDelegate.h */ = {isa = PBXFileReference; path = TouchTheDroidsAppDelegate.h; sourceTree = "<group>"; };
+		ACED19CE13DC444C0004D01E /* TouchTheDroidsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchTheDroidsAppDelegate.m; sourceTree = "<group>"; };
+		ACED19D113DC444C0004D01E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		ACED19D313DC444C0004D01E /* TouchTheDroidsViewController.h */ = {isa = PBXFileReference; path = TouchTheDroidsViewController.h; sourceTree = "<group>"; };
+		ACED19D413DC444C0004D01E /* TouchTheDroidsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchTheDroidsViewController.m; sourceTree = "<group>"; };
+		ACED19D713DC444C0004D01E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TouchTheDroidsViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ACED19B713DC444C0004D01E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACED19BF13DC444C0004D01E /* UIKit.framework in Frameworks */,
+				ACED19C113DC444C0004D01E /* Foundation.framework in Frameworks */,
+				ACED19C313DC444C0004D01E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ACED19AF13DC444C0004D01E = {
+			isa = PBXGroup;
+			children = (
+				ACED19C413DC444C0004D01E /* TouchTheDroids */,
+				ACED19BD13DC444C0004D01E /* Frameworks */,
+				ACED19BB13DC444C0004D01E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ACED19BB13DC444C0004D01E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ACED19BA13DC444C0004D01E /* TouchTheDroids.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ACED19BD13DC444C0004D01E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACED19BE13DC444C0004D01E /* UIKit.framework */,
+				ACED19C013DC444C0004D01E /* Foundation.framework */,
+				ACED19C213DC444C0004D01E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ACED19C413DC444C0004D01E /* TouchTheDroids */ = {
+			isa = PBXGroup;
+			children = (
+				ACED19CD13DC444C0004D01E /* TouchTheDroidsAppDelegate.h */,
+				ACED19CE13DC444C0004D01E /* TouchTheDroidsAppDelegate.m */,
+				ACED19D013DC444C0004D01E /* MainWindow.xib */,
+				ACED19D313DC444C0004D01E /* TouchTheDroidsViewController.h */,
+				ACED19D413DC444C0004D01E /* TouchTheDroidsViewController.m */,
+				ACED19D613DC444C0004D01E /* TouchTheDroidsViewController.xib */,
+				ACED19C513DC444C0004D01E /* Supporting Files */,
+			);
+			path = TouchTheDroids;
+			sourceTree = "<group>";
+		};
+		ACED19C513DC444C0004D01E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ACED19C613DC444C0004D01E /* TouchTheDroids-Info.plist */,
+				ACED19C713DC444C0004D01E /* InfoPlist.strings */,
+				ACED19CA13DC444C0004D01E /* main.m */,
+				ACED19CC13DC444C0004D01E /* TouchTheDroids-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ACED19B913DC444C0004D01E /* TouchTheDroids */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACED19DB13DC444C0004D01E /* Build configuration list for PBXNativeTarget "TouchTheDroids" */;
+			buildPhases = (
+				ACED19B613DC444C0004D01E /* Sources */,
+				ACED19B713DC444C0004D01E /* Frameworks */,
+				ACED19B813DC444C0004D01E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TouchTheDroids;
+			productName = TouchTheDroids;
+			productReference = ACED19BA13DC444C0004D01E /* TouchTheDroids.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ACED19B113DC444C0004D01E /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ACED19B413DC444C0004D01E /* Build configuration list for PBXProject "TouchTheDroids" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ACED19AF13DC444C0004D01E;
+			productRefGroup = ACED19BB13DC444C0004D01E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ACED19B913DC444C0004D01E /* TouchTheDroids */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ACED19B813DC444C0004D01E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACED19C913DC444C0004D01E /* InfoPlist.strings in Resources */,
+				ACED19D213DC444C0004D01E /* MainWindow.xib in Resources */,
+				ACED19D813DC444C0004D01E /* TouchTheDroidsViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ACED19B613DC444C0004D01E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACED19CB13DC444C0004D01E /* main.m in Sources */,
+				ACED19CF13DC444C0004D01E /* TouchTheDroidsAppDelegate.m in Sources */,
+				ACED19D513DC444C0004D01E /* TouchTheDroidsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ACED19C713DC444C0004D01E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACED19C813DC444C0004D01E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ACED19D013DC444C0004D01E /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACED19D113DC444C0004D01E /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		ACED19D613DC444C0004D01E /* TouchTheDroidsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACED19D713DC444C0004D01E /* en */,
+			);
+			name = TouchTheDroidsViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ACED19D913DC444C0004D01E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ACED19DA13DC444C0004D01E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ACED19DC13DC444C0004D01E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TouchTheDroids/TouchTheDroids-Prefix.pch";
+				INFOPLIST_FILE = "TouchTheDroids/TouchTheDroids-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ACED19DD13DC444C0004D01E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TouchTheDroids/TouchTheDroids-Prefix.pch";
+				INFOPLIST_FILE = "TouchTheDroids/TouchTheDroids-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ACED19B413DC444C0004D01E /* Build configuration list for PBXProject "TouchTheDroids" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACED19D913DC444C0004D01E /* Debug */,
+				ACED19DA13DC444C0004D01E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACED19DB13DC444C0004D01E /* Build configuration list for PBXNativeTarget "TouchTheDroids" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACED19DC13DC444C0004D01E /* Debug */,
+				ACED19DD13DC444C0004D01E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ACED19B113DC444C0004D01E /* Project object */;
+}
