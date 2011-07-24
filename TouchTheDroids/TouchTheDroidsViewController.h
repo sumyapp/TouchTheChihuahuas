@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TTDGameViewController.h"
 @interface TouchTheDroidsViewController : UIViewController
-
+- (IBAction)startGameButtonTouchUpInside:(id)sender;
 @end

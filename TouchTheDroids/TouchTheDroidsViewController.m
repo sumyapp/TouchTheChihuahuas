@@ -10,6 +10,12 @@
 
 @implementation TouchTheDroidsViewController
 
+- (IBAction)startGameButtonTouchUpInside:(id)sender {
+    TTDGameViewController *ttdGameViewController = [[[TTDGameViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    [self setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentModalViewController:ttdGameViewController animated:YES]; 
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
