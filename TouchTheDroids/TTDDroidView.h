@@ -21,11 +21,14 @@ enum {
     
     id delegate;
     int number;
+    CGRect _orgFrame;
     float targetPosX;
     float targetPosY;
     float velocity;
 }
 - (NSString*)description;
+- (void)setFrame:(CGRect)frame;
+- (CGRect)orgFrame;
 @property (nonatomic) int colorType;
 @property (nonatomic) float angle;
 @property (assign, readwrite) id delegate;

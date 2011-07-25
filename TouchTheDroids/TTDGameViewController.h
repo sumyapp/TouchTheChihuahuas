@@ -14,6 +14,7 @@
     int _destroyNormDroidCount;
     int _apperdDroidCount;
     int _destroyedDroidCount;
+    int _droidControlCount;
     float _nextDroidApperCount;
     float _gamePlayingTimeCount;
     NSTimer *_gamePlayingTimeCountTimer;

@@ -22,6 +22,7 @@
 
 - (void)droidViewTouched:(TTDDroidView*)droidView {
     LOG_METHOD
+    LOG(@"Droid[%d] is touched", droidView.number);
 }
 
 
@@ -45,6 +46,7 @@
 - (void)startGame {
     LOG_METHOD
     _apperdDroidCount = 0;
+    _droidControlCount = 0;
     _gamePlayingTimeCountTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(gameTimeControlTask:) userInfo:nil repeats:YES];
 }
 
@@ -52,6 +54,7 @@
     _gamePlayingTimeCount += 0.01;
     [_timeCountTextLabel setText:[NSString stringWithFormat:@"%.2f", _gamePlayingTimeCount]];
     
+    // テストのためコメントアウト
     _nextDroidApperCount -= 0.01;
     if(_nextDroidApperCount <= 0) {
         [self addDroid];
@@ -79,12 +82,17 @@
                 _nextDroidApperCount = 3.0;
                 break;
             default:
+                LOG(@"WARNING: this swich section not use");
                 _nextDroidApperCount = 1.0;
                 break;
         }
     }
     
-    [self moveDroids];
+    _droidControlCount += 1;
+    if(_droidControlCount % 10 == 0) {
+        [self moveDroids];
+        _droidControlCount = 0;
+    }
 }
 
 - (void)gameScoreControlTask:(id)sender {
@@ -92,11 +100,80 @@
 }
 
 - (void)moveDroids {
-    if(_droidViewsDic) {
-        for (TTDDroidView *droidView in _droidViewsDic) {
-            
+    if(!_droidViewsDic) {
+        return;
+    }
+    
+    for (NSNumber *droidViewKey in _droidViewsDic) {
+        TTDDroidView *droidView = [_droidViewsDic objectForKey:droidViewKey];
+        
+        // droidViewを目的地の方向にxy共にvelocity分進める
+        float distance = sqrt( (droidView.targetPosX - droidView.frame.origin.x) * (droidView.targetPosX- droidView.frame.origin.x) +
+                              (droidView.targetPosY - droidView.frame.origin.y) * (droidView.targetPosY - droidView.frame.origin.y) );
+        float movedDistance = distance - droidView.velocity;
+        float moveUnit = movedDistance / distance;
+        CGRect movedFrame;
+        //LOG(@"distance = %f, this droid is %@", distance, [droidView description]);
+        if(isnan(distance) || isinf(distance)) {
+            LOG(@"WARNING: a value is NaN or Inf");
+            break;
+        }        
+        
+        // 進行方向が右向き
+        if(droidView.targetPosX > [droidView orgFrame].origin.x) {
+            // 進行方向が下向き
+            if(droidView.targetPosY > [droidView orgFrame].origin.y) {
+                LOG(@"DROIDS[%d] is MOVE[%.1f]:→↓, moveUnit = %f, dist(%f=>%f)", droidView.number, distance - movedDistance, moveUnit, distance, movedDistance);
+                movedFrame = CGRectMake(droidView.frame.origin.x + droidView.velocity, droidView.frame.origin.y + droidView.velocity, droidView.frame.size.width, droidView.frame.size.height);
+            }
+            //進行方向が上向き
+            else {
+                LOG(@"MOVE:→↑");
+            }
+        }
+        // 進行方向が左向き
+        else {
+            // 進行方向が下向き
+            if(droidView.targetPosY > [droidView orgFrame].origin.y) {
+                LOG(@"MOVE:←↓");
+            }
+            //進行方向が上向き
+            else {
+                LOG(@"MOVE:←↑");
+            }
+        }
+        [droidView setFrame:movedFrame];                
+        
+        BOOL isDroidViewInvisible = NO;
+        // xがプラス方向に範囲外
+        if(droidView.frame.origin.x + droidView.frame.size.width > 320) {
+            // yがプラス方向に範囲外
+            if(droidView.frame.origin.y + droidView.frame.size.height > 460){
+                isDroidViewInvisible = YES;
+            }
+            // yがマイナス方向に範囲外
+            else if(droidView.frame.origin.y - droidView.frame.size.height < 0) {
+                isDroidViewInvisible = YES;
+            }
+        }
+        // xがマイナス方向に範囲外
+        else if(droidView.frame.origin.x - droidView.frame.size.width < 0) {
+            // yがプラス方向に範囲外
+            if(droidView.frame.origin.y + droidView.frame.size.height > 460){
+                isDroidViewInvisible = YES;
+            }
+            // yがマイナス方向に範囲外
+            else if(droidView.frame.origin.y - droidView.frame.size.height < 0) {
+                isDroidViewInvisible = YES;
+            }                
+        }
+        if(isDroidViewInvisible && distance < 300) {
+            LOG(@"RELEASE DROID[%d]", droidView.number);
+            [droidView removeFromSuperview];
+            [_droidViewsDic removeObjectForKey:droidViewKey];
         }
     }
+    
 }
 
 
@@ -108,12 +185,14 @@
     do {
         droidWidth = rand() % 100;
     } while (droidWidth < 30);
-    droidHeight = droidWidth * 1.8022284;
+    droidHeight = droidWidth * 1.80;
     
     // Droidの始点を8点のうちどこかを決定, それに合わせて目的地店とdroidの回転角度も設定
     float droidPosX, droidPosY;
     float droidTargetPosX, droidTargetPosY, droidAngle;
-    switch (rand() % 8) {
+    // TODO:テスト用
+//    switch (rand() % 8) {
+    switch (0) {
         case 0:
             droidPosX = 0 - droidWidth;
             droidPosY = 0 - droidHeight;
@@ -125,7 +204,7 @@
             droidPosX = 160 - droidWidth/2;
             droidPosY = 0 - droidHeight;
             droidTargetPosX = 160 - droidWidth/2;
-            droidTargetPosY = 320 + droidHeight;
+            droidTargetPosY = 460 + droidHeight;
             droidAngle = 180;
             break;
         case 2:
@@ -137,9 +216,9 @@
             break;
         case 3:
             droidPosX = 320;
-            droidPosY = 230 - droidHeight/2;
-            droidTargetPosX = 0 - droidWidth;
-            droidTargetPosY = 230 - droidHeight/2;
+            droidPosY = 230 - droidWidth/2;
+            droidTargetPosX = 0 - droidHeight;
+            droidTargetPosY = 230 - droidWidth/2;
             droidAngle = (-90);
             break;
         case 4:
@@ -164,16 +243,18 @@
             droidAngle = 45;
             break;
         case 7:
-            droidPosX = 0 - droidWidth;
-            droidPosY = 230 - droidHeight/2;
-            droidTargetPosX = 320 + droidWidth;
-            droidTargetPosY = 230 - droidHeight/2;
+            droidPosX = 0 - droidHeight;
+            droidPosY = 230 - droidWidth/2;
+            droidTargetPosX = 320 + droidHeight;
+            droidTargetPosY = 230 - droidWidth/2;
             droidAngle = 90;
             break;
         default:
+            LOG(@"WARNING: this swich section not use");
             break;
     }    
     // Droidの進行速度を設定
+    float droidVelocity = 1.0;
     
     
     // Droidのインスタンス化、設定設定
@@ -181,7 +262,9 @@
     [droidView setTargetPosX:droidTargetPosX];
     [droidView setTargetPosY:droidTargetPosY];
     [droidView setAngle:droidAngle];
+    [droidView setVelocity:droidVelocity];
     [droidView setNumber:_apperdDroidCount];
+    [droidView setDelegate:self];
 
     
     // Droidを表示
@@ -194,6 +277,23 @@
     LOG(@"APPER NEW DROID: %@", [droidView description]);
     
     _apperdDroidCount += 1;
+    
+//    // TODO:
+//    // テストのため、UIViewのAnimationを使ってみる
+//    //アニメーションの対象となるコンテキスト
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [UIView beginAnimations:nil context:context];
+//    //アニメーションを実行する時間
+//    [UIView setAnimationDuration:5.0];
+//    //アニメーションイベントを受け取るview
+//    //[UIView setAnimationDelegate:self];
+//    //アニメーション終了後に実行される
+//    //[UIView setAnimationDidStopSelector:@selector(endAnimation)];
+//    
+//    //TODO:
+//    [droidView setFrame:CGRectMake(droidTargetPosX, droidTargetPosY, droidWidth, droidHeight)];
+//    // アニメーション開始
+//    [UIView commitAnimations];
 }
 
 

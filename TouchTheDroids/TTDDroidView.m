@@ -21,6 +21,17 @@
     return [NSString stringWithFormat:@"droidColor = %d, droidNumber = %d, droidPosX = %f, droidPosY = %f, droidWidth = %f, droidHeight = %f, angle = %f,  droidTargetPosX = %f, droidTargetPosY = %f", _colorType, number, self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height, _angle, targetPosX, targetPosY];
 }
 
+- (void)setFrame:(CGRect)frame {
+    if(CGRectIsNull(_orgFrame) || CGRectIsEmpty(_orgFrame)) {
+        _orgFrame = frame;
+    }
+    [super setFrame:frame];
+}
+
+- (CGRect)orgFrame {
+    return _orgFrame;
+}
+
 - (void)setAngle:(float)angle {
     LOG_METHOD
     _angle = angle;
@@ -49,6 +60,7 @@
             [droidImageView setImage:[UIImage imageNamed:@"droid_gcolor.png"]];
             break;
         default:
+            LOG(@"WARNING: this swich section not use");
             break;
     }
 }
@@ -65,8 +77,18 @@
         // Initialization code
         droidImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [droidImageView setImage:[UIImage imageNamed:@"droid_gcolor.png"]];
+        [droidImageView setContentMode:UIViewContentModeScaleToFill];
+        [self addSubview:droidImageView];
+        
+        _orgFrame = frame;
     }
     return self;
+}
+
+- (void)dealloc {
+    LOG_METHOD
+    [super dealloc];
+    [droidImageView release], droidImageView = nil;
 }
 
 /*
