@@ -8,36 +8,23 @@
 
 #import <UIKit/UIKit.h>
 enum {
-    droid_GColor = 0,
-    droid_Green
+    droid_Green = 0,
+    droid_GColor
 };
 
 @protocol TTDDroidViewDelegate;
 
-@interface TTDDroidView : UIView {
-    UIImageView *droidImageView;
-    float _angle;
+@interface TTDDroidView : UIImageView {
     int _colorType;
-    
-    id delegate;
     int number;
-    CGRect _orgFrame;
-    float targetPosX;
-    float targetPosY;
-    float velocity;
+    id delegate;
 }
 - (NSString*)description;
-- (void)setFrame:(CGRect)frame;
-- (CGRect)orgFrame;
 @property (nonatomic) int colorType;
-@property (nonatomic) float angle;
-@property (assign, readwrite) id delegate;
 @property int number;
-@property float targetPosX;
-@property float targetPosY;
-@property float velocity;
+@property (assign, readwrite) id delegate;
 @end
 
 @protocol TTDDroidViewDelegate
-- (void)droidViewTouched:(TTDDroidView*)droidView;
+- (void)destroyDroid:(TTDDroidView*)droidView;
 @end

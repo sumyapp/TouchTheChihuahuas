@@ -23,6 +23,11 @@
 		ACED19EB13DC4C7E0004D01E /* droid_green_rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = ACED19EA13DC4C7E0004D01E /* droid_green_rotate.png */; };
 		ACED19EE13DC4EC40004D01E /* TTDGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACED19ED13DC4EC40004D01E /* TTDGameViewController.m */; };
 		ACED19F113DC4F0A0004D01E /* TTDDroidView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACED19F013DC4F0A0004D01E /* TTDDroidView.m */; };
+		ACEFB85A13E53C6200A08937 /* droid_size_announce_green.png in Resources */ = {isa = PBXBuildFile; fileRef = ACEFB85913E53C6200A08937 /* droid_size_announce_green.png */; };
+		ACF6B65313E55053007F155C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACF6B65213E55053007F155C /* Localizable.strings */; };
+		ACF6B65713E555B0007F155C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF6B65513E555A7007F155C /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ACF6B65913E55D09007F155C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF6B65813E55D09007F155C /* Icon.png */; };
+		ACF6B65B13E55D0C007F155C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF6B65A13E55D0C007F155C /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +54,12 @@
 		ACED19ED13DC4EC40004D01E /* TTDGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDGameViewController.m; sourceTree = "<group>"; };
 		ACED19EF13DC4F0A0004D01E /* TTDDroidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDDroidView.h; sourceTree = "<group>"; };
 		ACED19F013DC4F0A0004D01E /* TTDDroidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDDroidView.m; sourceTree = "<group>"; };
+		ACEFB85913E53C6200A08937 /* droid_size_announce_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = droid_size_announce_green.png; sourceTree = "<group>"; };
+		ACEFB85C13E53E3A00A08937 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/TouchTheDroidsViewController.xib; sourceTree = "<group>"; };
+		ACF6B65213E55053007F155C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		ACF6B65513E555A7007F155C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		ACF6B65813E55D09007F155C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		ACF6B65A13E55D0C007F155C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF6B65713E555B0007F155C /* GameKit.framework in Frameworks */,
 				ACED19BF13DC444C0004D01E /* UIKit.framework in Frameworks */,
 				ACED19C113DC444C0004D01E /* Foundation.framework in Frameworks */,
 				ACED19C313DC444C0004D01E /* CoreGraphics.framework in Frameworks */,
@@ -68,6 +80,8 @@
 		ACED19AF13DC444C0004D01E = {
 			isa = PBXGroup;
 			children = (
+				ACF6B65A13E55D0C007F155C /* Icon@2x.png */,
+				ACF6B65813E55D09007F155C /* Icon.png */,
 				ACED19C413DC444C0004D01E /* TouchTheDroids */,
 				ACED19BD13DC444C0004D01E /* Frameworks */,
 				ACED19BB13DC444C0004D01E /* Products */,
@@ -85,6 +99,7 @@
 		ACED19BD13DC444C0004D01E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACF6B65513E555A7007F155C /* GameKit.framework */,
 				ACED19BE13DC444C0004D01E /* UIKit.framework */,
 				ACED19C013DC444C0004D01E /* Foundation.framework */,
 				ACED19C213DC444C0004D01E /* CoreGraphics.framework */,
@@ -118,6 +133,7 @@
 				ACED19C713DC444C0004D01E /* InfoPlist.strings */,
 				ACED19CA13DC444C0004D01E /* main.m */,
 				ACED19CC13DC444C0004D01E /* TouchTheDroids-Prefix.pch */,
+				ACF6B65213E55053007F155C /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -125,6 +141,7 @@
 		ACED19E113DC47B70004D01E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				ACEFB85913E53C6200A08937 /* droid_size_announce_green.png */,
 				ACED19E813DC4B1A0004D01E /* droid_gcolor_rotate.png */,
 				ACED19EA13DC4C7E0004D01E /* droid_green_rotate.png */,
 				ACED19E613DC4A820004D01E /* button_bg.png */,
@@ -165,6 +182,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
 			);
 			mainGroup = ACED19AF13DC444C0004D01E;
 			productRefGroup = ACED19BB13DC444C0004D01E /* Products */;
@@ -189,6 +207,10 @@
 				ACED19E713DC4A820004D01E /* button_bg.png in Resources */,
 				ACED19E913DC4B1A0004D01E /* droid_gcolor_rotate.png in Resources */,
 				ACED19EB13DC4C7E0004D01E /* droid_green_rotate.png in Resources */,
+				ACEFB85A13E53C6200A08937 /* droid_size_announce_green.png in Resources */,
+				ACF6B65313E55053007F155C /* Localizable.strings in Resources */,
+				ACF6B65913E55D09007F155C /* Icon.png in Resources */,
+				ACF6B65B13E55D0C007F155C /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +252,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				ACED19D713DC444C0004D01E /* en */,
+				ACEFB85C13E53E3A00A08937 /* ja */,
 			);
 			name = TouchTheDroidsViewController.xib;
 			sourceTree = "<group>";
@@ -323,6 +346,7 @@
 				ACED19DD13DC444C0004D01E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,19 +7,27 @@
 //
 
 #import "TTDDroidView.h"
+#define DROID_COUNT_MARGIN 5
 
-@interface TTDGameViewController : UIViewController<TTDDroidViewDelegate> {
+@interface TTDGameViewController : UIViewController<UIAlertViewDelegate, TTDDroidViewDelegate> {
+    UILabel *_scoreLabel;
     UILabel *_textLabel;
     UILabel *_timeCountTextLabel;
-    int _destroyNormDroidCount;
+
     int _apperdDroidCount;
     int _destroyedDroidCount;
     int _droidControlCount;
     float _nextDroidApperCount;
     float _gamePlayingTimeCount;
     NSTimer *_gamePlayingTimeCountTimer;
-    
     NSMutableDictionary *_droidViewsDic;
+    NSMutableArray *_animatingDroidViews;
+    
+    int _colorType;
+    int _destroyNormDroidCount;
+    float _missDroidDestroyPenalty;
 }
+@property int colorType;
 @property int destroyNormDroidCount;
+@property float missDroidDestroyPenalty;
 @end

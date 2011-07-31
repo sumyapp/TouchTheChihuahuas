@@ -11,20 +11,19 @@
 @interface TTDGameViewController()
 - (void)startCountDown:(NSTimer*)timer;
 - (void)startGame;
+- (void)startGameCountStart;
 - (void)gameTimeControlTask:(NSTimer*)timer;
-- (void)gameScoreControlTask:(id)sender;
-- (void)moveDroids;
+- (void)destroyDroid:(TTDDroidView*)droidView;
+- (void)droidDestroySuccess:(TTDDroidView*)droidView;
+- (void)droidDestroyMiss:(TTDDroidView*)droidView;
+- (void)droidDestroyAnimationDidEnd;
 - (void)addDroid;
 @end
 
 @implementation TTDGameViewController
+@synthesize colorType = _colorType;
 @synthesize destroyNormDroidCount = _destroyNormDroidCount;
-
-- (void)droidViewTouched:(TTDDroidView*)droidView {
-    LOG_METHOD
-    LOG(@"Droid[%d] is touched", droidView.number);
-}
-
+@synthesize missDroidDestroyPenalty = _missDroidDestroyPenalty;
 
 - (void)startCountDown:(NSTimer*)timer {
     LOG_METHOD
@@ -45,41 +44,67 @@
 
 - (void)startGame {
     LOG_METHOD
+    // 各変数の初期化
     _apperdDroidCount = 0;
     _droidControlCount = 0;
+    _destroyedDroidCount = 0;
+    _gamePlayingTimeCount = 0;
+    
+    // ラベルの初期化
+    [_scoreLabel setText:[NSString stringWithFormat:@"%d", _destroyedDroidCount]];
+    [_timeCountTextLabel setText:[NSString stringWithFormat:@"%.2f", _gamePlayingTimeCount]];
+    [_textLabel setText:@""];
+    
+    // ゲームの開始
+    srand(time(NULL)); //内部のロジックで使ってるrandを初期化
     _gamePlayingTimeCountTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(gameTimeControlTask:) userInfo:nil repeats:YES];
 }
 
+- (void)startGameCountStart {
+    LOG_METHOD
+    // 各変数の初期化
+    _apperdDroidCount = 0;
+    _droidControlCount = 0;
+    _destroyedDroidCount = 0;
+    _gamePlayingTimeCount = 0;
+    
+    // ラベルの初期化
+    [_scoreLabel setText:@""];
+    [_timeCountTextLabel setText:@""];
+    [_textLabel setText:@"3"];
+
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCountDown:) userInfo:nil repeats:YES];
+}
+
+
 - (void)gameTimeControlTask:(NSTimer*)timer {
-    _gamePlayingTimeCount += 0.01;
+    _gamePlayingTimeCount = _gamePlayingTimeCount + 0.01;
     [_timeCountTextLabel setText:[NSString stringWithFormat:@"%.2f", _gamePlayingTimeCount]];
     
-    // テストのためコメントアウト
-    _nextDroidApperCount -= 0.01;
+    _nextDroidApperCount = _nextDroidApperCount - 0.01;
     if(_nextDroidApperCount <= 0) {
         [self addDroid];
         _nextDroidApperCount = 0;
     }
     
     if(_nextDroidApperCount == 0) {
-        srand(time(NULL));//被らない数値を渡して初期化
         switch (rand() % 6) {
             case 0:
-                _nextDroidApperCount = 0.5;
+                _nextDroidApperCount = 0.25;
                 break;
             case 1:
-                _nextDroidApperCount = 1.0;
+                _nextDroidApperCount = 0.5;
                 break;
             case 2:
-                _nextDroidApperCount = 1.5;
+                _nextDroidApperCount = 1.25;
                 break;
             case 3:
-                _nextDroidApperCount = 2.0;
+                _nextDroidApperCount = 1.5;
             case 4:
-                _nextDroidApperCount = 2.5;
+                _nextDroidApperCount = 1.75;
                 break;
             case 5:
-                _nextDroidApperCount = 3.0;
+                _nextDroidApperCount = 2.0;
                 break;
             default:
                 LOG(@"WARNING: this swich section not use");
@@ -87,185 +112,138 @@
                 break;
         }
     }
+}
+
+- (void)destroyDroid:(TTDDroidView*)droidView {
+    LOG_METHOD
+    LOG(@"DESTROY %d DROID:destroy droid[%d] = %@", _destroyedDroidCount, droidView.number, [droidView description]);    
     
-    _droidControlCount += 1;
-    if(_droidControlCount % 10 == 0) {
-        [self moveDroids];
-        _droidControlCount = 0;
+    // 最大サイズのドロイドかを検索
+    float maxDroidWidth = 0;
+    for (NSNumber *droidViewKey in _droidViewsDic) {
+        TTDDroidView *droidView = [_droidViewsDic objectForKey:droidViewKey];
+        if(maxDroidWidth < droidView.frame.size.width) {
+            maxDroidWidth = droidView.frame.size.width;
+        }
+    }
+    
+    // 最大サイズのドロイドだったので、成功
+    if(droidView.frame.size.width >= maxDroidWidth) {
+        [self droidDestroySuccess:droidView];
+    }
+    else {
+        [self droidDestroyMiss:droidView];
+    }    
+}
+
+- (void)droidDestroySuccess:(TTDDroidView*)droidView {
+    LOG_METHOD    
+    if(!_animatingDroidViews) {
+        _animatingDroidViews = [[NSMutableArray alloc] init];
+    }
+    [_animatingDroidViews addObject:droidView];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(droidDestroyAnimationDidEnd)];
+    CGAffineTransform rotate = CGAffineTransformMakeRotation(180.f * (M_PI / 180.0f));
+    CGAffineTransform scale = CGAffineTransformMakeScale(0.001, 0.001);
+    CGAffineTransform concat = CGAffineTransformConcat(rotate, scale);
+    [droidView setTransform:concat];
+    [UIView commitAnimations];
+    
+    // Droidの消去。画面からの消去はアニメーション後に行われる
+    [_droidViewsDic removeObjectForKey:[NSNumber numberWithInt:droidView.number]];
+    
+    // スコアの加算
+    _destroyedDroidCount = _destroyedDroidCount + 1;
+    [_scoreLabel setText:[NSString stringWithFormat:@"%d", _destroyedDroidCount]];
+    
+    // 何匹目かチェック
+    if(_destroyedDroidCount >= _destroyNormDroidCount) {
+        [_gamePlayingTimeCountTimer invalidate];
+        _gamePlayingTimeCountTimer = nil;
+        
+        // 生成と同時に各種設定も完了させる例
+        UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:@"aaa" message:@"aaa" delegate:self
+                                              cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
+        [alert show];
+        for (NSNumber *droidViewKey in _droidViewsDic) {
+            [[_droidViewsDic objectForKey:droidViewKey] removeFromSuperview];
+        }
+        [_droidViewsDic release], _droidViewsDic = nil;
+    }
+    else {
+        // ドロイド追加
+        [self addDroid];
     }
 }
 
-- (void)gameScoreControlTask:(id)sender {
+- (void)droidDestroyMiss:(TTDDroidView*)droidView {
     LOG_METHOD
+    
+    if(!_animatingDroidViews) {
+        _animatingDroidViews = [[NSMutableArray alloc] init];
+    }
+    [_animatingDroidViews addObject:droidView];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(droidDestroyAnimationDidEnd)];
+    CGAffineTransform rotate = CGAffineTransformMakeRotation(45.f * (M_PI / 180.0f));
+    CGAffineTransform scale = CGAffineTransformMakeScale(0.5, 0.5);
+    CGAffineTransform concat = CGAffineTransformConcat(rotate, scale);
+    [droidView setTransform:concat];
+    [UIView commitAnimations];
+    
+    // Droidの消去。画面からの消去はアニメーション後に行われる
+    [_droidViewsDic removeObjectForKey:[NSNumber numberWithInt:droidView.number]];
+
+    // ペナルティとして、ゲームの経過時間をちょっと＋
+    _gamePlayingTimeCount+=_missDroidDestroyPenalty;
+    // ペナルティとして、ドロイド追加を遅延
+    [NSTimer scheduledTimerWithTimeInterval:_missDroidDestroyPenalty target:self selector:@selector(addDroid) userInfo:nil repeats:NO];
 }
 
-- (void)moveDroids {
-    if(!_droidViewsDic) {
+- (void)droidDestroyAnimationDidEnd {
+    LOG_METHOD
+    if(_animatingDroidViews && [_animatingDroidViews count] > 1) {
+        TTDDroidView *droidView = [_animatingDroidViews objectAtIndex:0];
+        [_animatingDroidViews removeObjectAtIndex:0];
+        [droidView setHidden:YES];
+        [droidView removeFromSuperview];
+    }
+}
+
+- (void)addDroid {
+    if(_droidViewsDic.count + _destroyedDroidCount >= _destroyNormDroidCount || !_gamePlayingTimeCountTimer) {
         return;
     }
     
-    for (NSNumber *droidViewKey in _droidViewsDic) {
-        TTDDroidView *droidView = [_droidViewsDic objectForKey:droidViewKey];
-        
-        // droidViewを目的地の方向にxy共にvelocity分進める
-        float distance = sqrt( (droidView.targetPosX - droidView.frame.origin.x) * (droidView.targetPosX- droidView.frame.origin.x) +
-                              (droidView.targetPosY - droidView.frame.origin.y) * (droidView.targetPosY - droidView.frame.origin.y) );
-        float movedDistance = distance - droidView.velocity;
-        float moveUnit = movedDistance / distance;
-        CGRect movedFrame;
-        //LOG(@"distance = %f, this droid is %@", distance, [droidView description]);
-        if(isnan(distance) || isinf(distance)) {
-            LOG(@"WARNING: a value is NaN or Inf");
-            break;
-        }        
-        
-        // 進行方向が右向き
-        if(droidView.targetPosX > [droidView orgFrame].origin.x) {
-            // 進行方向が下向き
-            if(droidView.targetPosY > [droidView orgFrame].origin.y) {
-                LOG(@"DROIDS[%d] is MOVE[%.1f]:→↓, moveUnit = %f, dist(%f=>%f)", droidView.number, distance - movedDistance, moveUnit, distance, movedDistance);
-                movedFrame = CGRectMake(droidView.frame.origin.x + droidView.velocity, droidView.frame.origin.y + droidView.velocity, droidView.frame.size.width, droidView.frame.size.height);
-            }
-            //進行方向が上向き
-            else {
-                LOG(@"MOVE:→↑");
-            }
-        }
-        // 進行方向が左向き
-        else {
-            // 進行方向が下向き
-            if(droidView.targetPosY > [droidView orgFrame].origin.y) {
-                LOG(@"MOVE:←↓");
-            }
-            //進行方向が上向き
-            else {
-                LOG(@"MOVE:←↑");
-            }
-        }
-        [droidView setFrame:movedFrame];                
-        
-        BOOL isDroidViewInvisible = NO;
-        // xがプラス方向に範囲外
-        if(droidView.frame.origin.x + droidView.frame.size.width > 320) {
-            // yがプラス方向に範囲外
-            if(droidView.frame.origin.y + droidView.frame.size.height > 460){
-                isDroidViewInvisible = YES;
-            }
-            // yがマイナス方向に範囲外
-            else if(droidView.frame.origin.y - droidView.frame.size.height < 0) {
-                isDroidViewInvisible = YES;
-            }
-        }
-        // xがマイナス方向に範囲外
-        else if(droidView.frame.origin.x - droidView.frame.size.width < 0) {
-            // yがプラス方向に範囲外
-            if(droidView.frame.origin.y + droidView.frame.size.height > 460){
-                isDroidViewInvisible = YES;
-            }
-            // yがマイナス方向に範囲外
-            else if(droidView.frame.origin.y - droidView.frame.size.height < 0) {
-                isDroidViewInvisible = YES;
-            }                
-        }
-        if(isDroidViewInvisible && distance < 300) {
-            LOG(@"RELEASE DROID[%d]", droidView.number);
-            [droidView removeFromSuperview];
-            [_droidViewsDic removeObjectForKey:droidViewKey];
-        }
-    }
-    
-}
-
-
-- (void)addDroid {
-    LOG_METHOD
     // Droidのサイズを決定
-    srand(time(NULL));//被らない数値を渡して初期化
     float droidWidth, droidHeight;
     do {
-        droidWidth = rand() % 100;
-    } while (droidWidth < 30);
+        droidWidth = rand() % 150;
+    } while (droidWidth < 25);
     droidHeight = droidWidth * 1.80;
     
     // Droidの始点を8点のうちどこかを決定, それに合わせて目的地店とdroidの回転角度も設定
     float droidPosX, droidPosY;
-    float droidTargetPosX, droidTargetPosY, droidAngle;
-    // TODO:テスト用
-//    switch (rand() % 8) {
-    switch (0) {
-        case 0:
-            droidPosX = 0 - droidWidth;
-            droidPosY = 0 - droidHeight;
-            droidTargetPosX = 320 + droidWidth;
-            droidTargetPosY = 460 + droidHeight;
-            droidAngle = 180 - 45;
-            break;
-        case 1:
-            droidPosX = 160 - droidWidth/2;
-            droidPosY = 0 - droidHeight;
-            droidTargetPosX = 160 - droidWidth/2;
-            droidTargetPosY = 460 + droidHeight;
-            droidAngle = 180;
-            break;
-        case 2:
-            droidPosX = 320;
-            droidPosY = 0 - droidHeight;
-            droidTargetPosX = 0 - droidWidth;
-            droidTargetPosY = 460 + droidHeight;
-            droidAngle = 180 + 45;
-            break;
-        case 3:
-            droidPosX = 320;
-            droidPosY = 230 - droidWidth/2;
-            droidTargetPosX = 0 - droidHeight;
-            droidTargetPosY = 230 - droidWidth/2;
-            droidAngle = (-90);
-            break;
-        case 4:
-            droidPosX = 320;
-            droidPosY = 460 + droidHeight;
-            droidTargetPosX = 0 - droidWidth;
-            droidTargetPosY = 0 - droidHeight;
-            droidAngle = (-45);
-            break;
-        case 5:
-            droidPosX = 160 - droidWidth/2;
-            droidPosY = 460;
-            droidTargetPosX = 160 - droidWidth/2;
-            droidTargetPosY = 0 - droidHeight;
-            droidAngle = 0;
-            break;
-        case 6:
-            droidPosX = 0 - droidWidth;
-            droidPosY = 460;
-            droidTargetPosX = 320 + droidWidth;
-            droidTargetPosY = 0 - droidHeight;
-            droidAngle = 45;
-            break;
-        case 7:
-            droidPosX = 0 - droidHeight;
-            droidPosY = 230 - droidWidth/2;
-            droidTargetPosX = 320 + droidHeight;
-            droidTargetPosY = 230 - droidWidth/2;
-            droidAngle = 90;
-            break;
-        default:
-            LOG(@"WARNING: this swich section not use");
-            break;
-    }    
-    // Droidの進行速度を設定
-    float droidVelocity = 1.0;
-    
+    do {
+        droidPosX = rand() % 320;
+    } while (droidPosX + droidWidth > 320);
+    do {
+        droidPosY = rand() % 460;
+    } while (droidPosY + droidHeight > 460);
     
     // Droidのインスタンス化、設定設定
     TTDDroidView *droidView = [[TTDDroidView alloc] initWithFrame:CGRectMake(droidPosX, droidPosY, droidWidth, droidHeight)];
-    [droidView setTargetPosX:droidTargetPosX];
-    [droidView setTargetPosY:droidTargetPosY];
-    [droidView setAngle:droidAngle];
-    [droidView setVelocity:droidVelocity];
+    [droidView setColorType:_colorType];
     [droidView setNumber:_apperdDroidCount];
     [droidView setDelegate:self];
-
+    [droidView setAlpha:0.0];
     
     // Droidを表示
     if(!_droidViewsDic) {
@@ -273,29 +251,37 @@
     }
     [_droidViewsDic setObject:droidView forKey:[NSNumber numberWithInt:_apperdDroidCount]];
     [self.view addSubview:droidView];
+    [droidView release];
     
+    // Droidを追加したことを変数に保存
+    _apperdDroidCount = _apperdDroidCount + 1;
+    
+    //アニメーションの対象となるコンテキスト
+   CGContextRef context = UIGraphicsGetCurrentContext();
+   [UIView beginAnimations:nil context:context];
+    //アニメーションを実行する時間
+    [UIView setAnimationDuration:0.25];
+    //アニメーションイベントを受け取るview
+    [UIView setAnimationDelegate:self];
+    //アニメーション終了後に実行される
+    //[UIView setAnimationDidStopSelector:@selector(endAnimation)];
+    [droidView setAlpha:1.0];
+    // アニメーション開始
+    [UIView commitAnimations];
     LOG(@"APPER NEW DROID: %@", [droidView description]);
-    
-    _apperdDroidCount += 1;
-    
-//    // TODO:
-//    // テストのため、UIViewのAnimationを使ってみる
-//    //アニメーションの対象となるコンテキスト
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    [UIView beginAnimations:nil context:context];
-//    //アニメーションを実行する時間
-//    [UIView setAnimationDuration:5.0];
-//    //アニメーションイベントを受け取るview
-//    //[UIView setAnimationDelegate:self];
-//    //アニメーション終了後に実行される
-//    //[UIView setAnimationDidStopSelector:@selector(endAnimation)];
-//    
-//    //TODO:
-//    [droidView setFrame:CGRectMake(droidTargetPosX, droidTargetPosY, droidWidth, droidHeight)];
-//    // アニメーション開始
-//    [UIView commitAnimations];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    LOG_METHOD
+    switch (buttonIndex) {
+        case 1:
+            [self startGameCountStart];
+            break;
+        default:
+            [self dismissModalViewControllerAnimated:YES];
+            break;
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -315,13 +301,19 @@
         [self.view addSubview:_textLabel];
         
         // 開始後に経過時間を表示
-        _timeCountTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320-50, 32)];
-        [_timeCountTextLabel setFont:[UIFont systemFontOfSize:14]];
+        _timeCountTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320-50-100, 20)];
+        [_timeCountTextLabel setFont:[UIFont systemFontOfSize:14.0]];
         [_timeCountTextLabel setTextColor:[UIColor whiteColor]];
         [_timeCountTextLabel setBackgroundColor:[UIColor clearColor]];
         [_timeCountTextLabel setTextAlignment:UITextAlignmentRight];
         [self.view addSubview:_timeCountTextLabel];
         
+        _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 20)];
+        [_scoreLabel setFont:[UIFont systemFontOfSize:24.0]];
+        [_scoreLabel setTextColor:[UIColor whiteColor]];
+        [_scoreLabel setBackgroundColor:[UIColor clearColor]];
+        [_scoreLabel setTextAlignment:UITextAlignmentLeft];
+        [self.view addSubview:_scoreLabel];        
     }
     return self;
 }
@@ -348,7 +340,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startCountDown:) userInfo:nil repeats:YES];
+    
+    [self startGameCountStart];
 }
 
 
@@ -368,6 +361,11 @@
 - (void)dealloc {
     LOG_METHOD
     [super dealloc];
+    
+    [_scoreLabel release];
+    [_textLabel release];
+    [_timeCountTextLabel release];
+    [_droidViewsDic release];
 }
 
 @end

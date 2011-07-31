@@ -66,7 +66,7 @@
 						<string key="NSFrame">{{20, 202}, {280, 88}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="1017642545"/>
 						<string key="NSReuseIdentifierKey">_NS:222</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -101,7 +101,7 @@
 						<string key="NSFrame">{{100, 317}, {200, 63}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="402097169"/>
+						<reference key="NSNextKeyView" ref="116310320"/>
 						<string key="NSReuseIdentifierKey">_NS:222</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -191,13 +191,13 @@
 							<string key="NSResourceName">droid_green.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="402097169">
+					<object class="IBUIImageView" id="116310320">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{81, 388}, {316, 47}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="191248365"/>
+						<reference key="NSNextKeyView" ref="823678997"/>
 						<string key="NSReuseIdentifierKey">_NS:541</string>
 						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -207,10 +207,10 @@
 							<string key="NSResourceName">droid_size_announce_green.png</string>
 						</object>
 					</object>
-					<object class="IBUILabel" id="191248365">
+					<object class="IBUILabel" id="823678997">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{81, 439}, {239, 21}}</string>
+						<string key="NSFrame">{{81, 439}, {284, 28}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -220,10 +220,10 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Touch the biggest size droid</string>
+						<string key="IBUIText">一番大きなDroidをタッチ！</string>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
+							<string key="NSName">HiraKakuProN-W3</string>
+							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
@@ -235,7 +235,7 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUIButton" id="491501340">
+					<object class="IBUIButton" id="984594066">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 350}, {92, 110}}</string>
@@ -290,12 +290,13 @@
 					<int key="connectionID">16</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">droidLeftBottomImageView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1017642545"/>
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">changeDroidColorButtonDown:</string>
+						<reference key="source" ref="984594066"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">1</int>
 					</object>
-					<int key="connectionID">22</int>
+					<int key="connectionID">21</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -303,16 +304,15 @@
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="996253821"/>
 					</object>
-					<int key="connectionID">23</int>
+					<int key="connectionID">22</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">changeDroidColorButtonDown:</string>
-						<reference key="source" ref="491501340"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">1</int>
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">droidLeftBottomImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1017642545"/>
 					</object>
-					<int key="connectionID">24</int>
+					<int key="connectionID">23</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -346,9 +346,9 @@
 							<reference ref="996253821"/>
 							<reference ref="203794005"/>
 							<reference ref="941924630"/>
-							<reference ref="191248365"/>
-							<reference ref="402097169"/>
-							<reference ref="491501340"/>
+							<reference ref="116310320"/>
+							<reference ref="823678997"/>
+							<reference ref="984594066"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -379,7 +379,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="402097169"/>
+						<reference key="object" ref="116310320"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -389,12 +389,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">19</int>
-						<reference key="object" ref="191248365"/>
+						<reference key="object" ref="823678997"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">21</int>
-						<reference key="object" ref="491501340"/>
+						<int key="objectID">20</int>
+						<reference key="object" ref="984594066"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
 				</object>
@@ -413,7 +413,7 @@
 					<string>15.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
-					<string>21.IBPluginDependency</string>
+					<string>20.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -448,7 +448,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">24</int>
+			<int key="maxID">23</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
