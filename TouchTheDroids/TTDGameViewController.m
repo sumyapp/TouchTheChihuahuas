@@ -31,7 +31,7 @@
     NSMutableDictionary *highScoreDataSet = [[NSMutableDictionary alloc] init];
     [highScoreDataSet setObject:[NSNumber numberWithBool:NO]
                          forKey:@"HIGH_SCORE_ALREADY_SEND"];
-    [highScoreDataSet setObject:[NSNumber numberWithFloat:_gamePlayingTimeCount]
+    [highScoreDataSet setObject:[NSNumber numberWithFloat:_gamePlayingTimeCount*100]
                          forKey:@"HIGH_SCORE"];
     [highScoreDataSet setObject:[NSDate date] forKey:@"HIGH_SCORE_GOT_DATE"];
     
@@ -189,13 +189,13 @@
             // ハイスコアを保存
             [self saveHighScore];
             // ハイスコアおめでとうメッセージ
-            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore", nil) message:NSLocalizedString(@"SuccessfulHighscore", nil) delegate:self
+            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore!", nil) message:NSLocalizedString(@"Successful. You destroyed all the droids!\nAnd, You got a new record!", nil) delegate:self
                                                   cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
             [alert show];
         }
         else {
             // クリアおめでとうメッセージ
-            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish", nil) message:NSLocalizedString(@"SuccessfulFinish", nil) delegate:self
+            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish!", nil) message:NSLocalizedString(@"Successful. You destroyed all the droids!", nil) delegate:self
                                                   cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
             [alert show];
         }
