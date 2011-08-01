@@ -18,12 +18,28 @@
 - (void)droidDestroyMiss:(TTDDroidView*)droidView;
 - (void)droidDestroyAnimationDidEnd;
 - (void)addDroid;
+- (void)saveHighScore;
 @end
 
 @implementation TTDGameViewController
 @synthesize colorType = _colorType;
 @synthesize destroyNormDroidCount = _destroyNormDroidCount;
 @synthesize missDroidDestroyPenalty = _missDroidDestroyPenalty;
+
+- (void)saveHighScore {
+    LOG_METHOD
+    NSMutableDictionary *highScoreDataSet = [[NSMutableDictionary alloc] init];
+    [highScoreDataSet setObject:[NSNumber numberWithBool:NO]
+                         forKey:@"HIGH_SCORE_ALREADY_SEND"];
+    [highScoreDataSet setObject:[NSNumber numberWithFloat:_gamePlayingTimeCount]
+                         forKey:@"HIGH_SCORE"];
+    [highScoreDataSet setObject:[NSDate date] forKey:@"HIGH_SCORE_GOT_DATE"];
+    
+    // ファイルに保存
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:highScoreDataSet forKey:@"HIGH_SCORE_DATA_world_ranking"];
+    [defaults synchronize];
+}
 
 - (void)startCountDown:(NSTimer*)timer {
     LOG_METHOD
@@ -165,10 +181,25 @@
         [_gamePlayingTimeCountTimer invalidate];
         _gamePlayingTimeCountTimer = nil;
         
-        // 生成と同時に各種設定も完了させる例
-        UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:@"aaa" message:@"aaa" delegate:self
-                                              cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
-        [alert show];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *savedHighScore = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking"];
+        // ハイスコアが更新されてたら保存する
+        if(savedHighScore == nil || [[savedHighScore objectForKey:@"HIGH_SCORE"] floatValue] >= _gamePlayingTimeCount) {
+            // ハイスコアを保存
+            [self saveHighScore];
+            // ハイスコアおめでとうメッセージ
+            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore", nil) message:NSLocalizedString(@"SuccessfulHighscore", nil) delegate:self
+                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
+            [alert show];
+        }
+        else {
+            // クリアおめでとうメッセージ
+            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish", nil) message:NSLocalizedString(@"SuccessfulFinish", nil) delegate:self
+                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
+            [alert show];
+        }
+        
         for (NSNumber *droidViewKey in _droidViewsDic) {
             [[_droidViewsDic objectForKey:droidViewKey] removeFromSuperview];
         }

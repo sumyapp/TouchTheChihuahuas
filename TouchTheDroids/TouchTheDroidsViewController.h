@@ -10,11 +10,13 @@
 #import <GameKit/GameKit.h>
 #import "TTDGameViewController.h"
 
-@interface TouchTheDroidsViewController : UIViewController {
+@interface TouchTheDroidsViewController : UIViewController<GKLeaderboardViewControllerDelegate> {
+    IBOutlet UIButton *showLeaderboardButton;
     IBOutlet UIImageView *droidCenterImageView;
     IBOutlet UIImageView *droidLeftBottomImageView;
     int _colorType;
 }
 - (IBAction)startGameButtonTouchUpInside:(id)sender;
 - (IBAction)changeDroidColorButtonDown:(id)sender;
+- (IBAction)showLeaderboardButtonTouchUpInside:(id)sender;
 @end

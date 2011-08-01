@@ -10,6 +10,34 @@
 
 @implementation TouchTheDroidsViewController
 
+- (void)reportScore:(float)score forCategory:(NSString*)category
+{ 
+    GKScore *scoreReporter = [[[GKScore alloc] initWithCategory:category] autorelease];
+    scoreReporter.value = score;
+    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+        if (error != nil)
+        {
+            //報告エラーの処理
+            LOG(@"ERROR MESSAGE");
+        } else {
+            LOG(@"MAYBE OK");//console に"多分OK"を出力
+            NSMutableDictionary *highScoreDataSet = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"HIGH_SCORE_DATA_%@", category]]];
+            if(highScoreDataSet != nil) {
+                // 未送信の最高スコアがあれば、それを送信する。
+                if(![highScoreDataSet objectForKey:@"HIGH_SCORE_ALREADY_SEND"]) {
+                    [highScoreDataSet setObject:[NSNumber numberWithBool:YES] forKey:@"HIGH_SCORE_ALREADY_SEND"];
+                    [highScoreDataSet setObject:[NSDate date] forKey:@"HIGH_SCORE_SEND_DATE"];
+                }
+            }
+        }
+    }];
+}
+
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
+    [self dismissModalViewControllerAnimated: YES];
+    [viewController release];
+}
+
 - (BOOL)isGameCenterAPIAvailable {
     // Check for presence of GKLocalPlayer API.
     Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
@@ -31,18 +59,6 @@
             // 認証済みプレーヤーの追加タスクを実行する
         }
     }];
-}
-
-- (void) showLeaderboard;
-{
-    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
-    if (leaderboardController != NULL) 
-    {
-        //leaderboardController.category = self.currentLeaderBoard;
-        //leaderboardController.timeScope = GKLeaderboardTimeScopeAllTime;
-        leaderboardController.leaderboardDelegate = self; 
-        [self presentModalViewController: leaderboardController animated: YES];
-    }
 }
 
 - (IBAction)changeDroidColorButtonDown:(id)sender {
@@ -84,6 +100,19 @@
     [self presentModalViewController:ttdGameViewController animated:YES];
 }
 
+- (IBAction)showLeaderboardButtonTouchUpInside:(id)sender {
+    LOG_METHOD
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+    if (leaderboardController != NULL) 
+    {
+        //leaderboardController.category = self.currentLeaderBoard;
+        //leaderboardController.timeScope = GKLeaderboardTimeScopeAllTime;
+        leaderboardController.leaderboardDelegate = self; 
+        [self presentModalViewController:leaderboardController animated:YES];
+    }
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -94,13 +123,32 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewDidAppear:(BOOL)animated {
+    LOG_METHOD
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *highScoreData = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking"];
+    if(highScoreData != nil) {
+        // 未送信の最高スコアがあれば、それを送信する。
+        if(![[highScoreData objectForKey:@"HIGH_SCORE_ALREADY_SEND"] boolValue]) {
+            [self reportScore:[[highScoreData objectForKey:@"HIGH_SCORE"] floatValue]
+                  forCategory:@"world_ranking"];            
+        }
+    }
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    if([self isGameCenterAPIAvailable]){
+    if([self isGameCenterAPIAvailable]){        
+        // ユーザのGameCenter認証
         [self authenticateLocalPlayer];
+    }
+    else {
+        // ボタンを隠す
+        [showLeaderboardButton setHidden:YES];
     }
 
 }

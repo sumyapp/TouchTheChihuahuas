@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC94A4AA13E5B96B0095CDE6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94A4A913E5B96B0095CDE6 /* Default@2x.png */; };
+		AC94A4AD13E5B96D0095CDE6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94A4AC13E5B96D0095CDE6 /* Default.png */; };
+		ACDFAB6113E5A9EE00129D83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACDFAB6313E5A9EE00129D83 /* Localizable.strings */; };
 		ACED19BF13DC444C0004D01E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACED19BE13DC444C0004D01E /* UIKit.framework */; };
 		ACED19C113DC444C0004D01E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACED19C013DC444C0004D01E /* Foundation.framework */; };
 		ACED19C313DC444C0004D01E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACED19C213DC444C0004D01E /* CoreGraphics.framework */; };
@@ -24,13 +27,16 @@
 		ACED19EE13DC4EC40004D01E /* TTDGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACED19ED13DC4EC40004D01E /* TTDGameViewController.m */; };
 		ACED19F113DC4F0A0004D01E /* TTDDroidView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACED19F013DC4F0A0004D01E /* TTDDroidView.m */; };
 		ACEFB85A13E53C6200A08937 /* droid_size_announce_green.png in Resources */ = {isa = PBXBuildFile; fileRef = ACEFB85913E53C6200A08937 /* droid_size_announce_green.png */; };
-		ACF6B65313E55053007F155C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACF6B65213E55053007F155C /* Localizable.strings */; };
 		ACF6B65713E555B0007F155C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF6B65513E555A7007F155C /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		ACF6B65913E55D09007F155C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF6B65813E55D09007F155C /* Icon.png */; };
 		ACF6B65B13E55D0C007F155C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF6B65A13E55D0C007F155C /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC94A4A913E5B96B0095CDE6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		AC94A4AC13E5B96D0095CDE6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		ACDFAB6213E5A9EE00129D83 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ACDFAB6513E5A9F500129D83 /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ACED19BA13DC444C0004D01E /* TouchTheDroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchTheDroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACED19BE13DC444C0004D01E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACED19C013DC444C0004D01E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -56,10 +62,9 @@
 		ACED19F013DC4F0A0004D01E /* TTDDroidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDDroidView.m; sourceTree = "<group>"; };
 		ACEFB85913E53C6200A08937 /* droid_size_announce_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = droid_size_announce_green.png; sourceTree = "<group>"; };
 		ACEFB85C13E53E3A00A08937 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/TouchTheDroidsViewController.xib; sourceTree = "<group>"; };
-		ACF6B65213E55053007F155C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		ACF6B65513E555A7007F155C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		ACF6B65813E55D09007F155C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		ACF6B65A13E55D0C007F155C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		ACF6B65813E55D09007F155C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		ACF6B65A13E55D0C007F155C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +85,6 @@
 		ACED19AF13DC444C0004D01E = {
 			isa = PBXGroup;
 			children = (
-				ACF6B65A13E55D0C007F155C /* Icon@2x.png */,
-				ACF6B65813E55D09007F155C /* Icon.png */,
 				ACED19C413DC444C0004D01E /* TouchTheDroids */,
 				ACED19BD13DC444C0004D01E /* Frameworks */,
 				ACED19BB13DC444C0004D01E /* Products */,
@@ -128,12 +131,16 @@
 		ACED19C513DC444C0004D01E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AC94A4AC13E5B96D0095CDE6 /* Default.png */,
+				AC94A4A913E5B96B0095CDE6 /* Default@2x.png */,
+				ACF6B65A13E55D0C007F155C /* Icon@2x.png */,
+				ACF6B65813E55D09007F155C /* Icon.png */,
 				ACED19E113DC47B70004D01E /* images */,
 				ACED19C613DC444C0004D01E /* TouchTheDroids-Info.plist */,
 				ACED19C713DC444C0004D01E /* InfoPlist.strings */,
 				ACED19CA13DC444C0004D01E /* main.m */,
 				ACED19CC13DC444C0004D01E /* TouchTheDroids-Prefix.pch */,
-				ACF6B65213E55053007F155C /* Localizable.strings */,
+				ACDFAB6313E5A9EE00129D83 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -208,9 +215,11 @@
 				ACED19E913DC4B1A0004D01E /* droid_gcolor_rotate.png in Resources */,
 				ACED19EB13DC4C7E0004D01E /* droid_green_rotate.png in Resources */,
 				ACEFB85A13E53C6200A08937 /* droid_size_announce_green.png in Resources */,
-				ACF6B65313E55053007F155C /* Localizable.strings in Resources */,
+				ACDFAB6113E5A9EE00129D83 /* Localizable.strings in Resources */,
 				ACF6B65913E55D09007F155C /* Icon.png in Resources */,
 				ACF6B65B13E55D0C007F155C /* Icon@2x.png in Resources */,
+				AC94A4AA13E5B96B0095CDE6 /* Default@2x.png in Resources */,
+				AC94A4AD13E5B96D0095CDE6 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +241,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		ACDFAB6313E5A9EE00129D83 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACDFAB6213E5A9EE00129D83 /* en */,
+				ACDFAB6513E5A9F500129D83 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		ACED19C713DC444C0004D01E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -279,7 +297,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -296,7 +314,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -309,7 +327,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchTheDroids/TouchTheDroids-Prefix.pch";
 				INFOPLIST_FILE = "TouchTheDroids/TouchTheDroids-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -321,7 +339,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchTheDroids/TouchTheDroids-Prefix.pch";
 				INFOPLIST_FILE = "TouchTheDroids/TouchTheDroids-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
