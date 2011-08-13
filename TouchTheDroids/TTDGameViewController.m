@@ -31,13 +31,13 @@
     NSMutableDictionary *highScoreDataSet = [[NSMutableDictionary alloc] init];
     [highScoreDataSet setObject:[NSNumber numberWithBool:NO]
                          forKey:@"HIGH_SCORE_ALREADY_SEND"];
-    [highScoreDataSet setObject:[NSNumber numberWithFloat:_gamePlayingTimeCount*100]
+    [highScoreDataSet setObject:[NSNumber numberWithFloat:_gamePlayingTimeCount]
                          forKey:@"HIGH_SCORE"];
     [highScoreDataSet setObject:[NSDate date] forKey:@"HIGH_SCORE_GOT_DATE"];
     
     // ファイルに保存
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:highScoreDataSet forKey:@"HIGH_SCORE_DATA_world_ranking"];
+    [defaults setObject:highScoreDataSet forKey:@"HIGH_SCORE_DATA_world_ranking_25droids"];
     [defaults synchronize];
 }
 
@@ -183,7 +183,7 @@
         
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *savedHighScore = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking"];
+        NSDictionary *savedHighScore = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25droids"];
         // ハイスコアが更新されてたら保存する
         if(savedHighScore == nil || [[savedHighScore objectForKey:@"HIGH_SCORE"] floatValue] >= _gamePlayingTimeCount) {
             // ハイスコアを保存
@@ -258,7 +258,7 @@
     do {
         droidWidth = rand() % 150;
     } while (droidWidth < 25);
-    droidHeight = droidWidth * 1.80;
+    droidHeight = droidWidth * DROID_ASPECT_RATIO;
     
     // Droidの始点を8点のうちどこかを決定, それに合わせて目的地店とdroidの回転角度も設定
     float droidPosX, droidPosY;

@@ -96,8 +96,10 @@
     [ttdGameViewController setDestroyNormDroidCount:25];
     [ttdGameViewController setMissDroidDestroyPenalty:2.25];
     [ttdGameViewController setColorType:_colorType];
-    [self setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentModalViewController:ttdGameViewController animated:YES];
+    if ([ttdGameViewController respondsToSelector:@selector(setModalPresentationStyle:)]) {
+        [ttdGameViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+    }
+        [self presentModalViewController:ttdGameViewController animated:YES];
 }
 
 - (IBAction)showLeaderboardButtonTouchUpInside:(id)sender {
@@ -127,12 +129,12 @@
     LOG_METHOD
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *highScoreData = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking"];
+    NSDictionary *highScoreData = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25droids"];
     if(highScoreData != nil) {
         // 未送信の最高スコアがあれば、それを送信する。
         if(![[highScoreData objectForKey:@"HIGH_SCORE_ALREADY_SEND"] boolValue]) {
-            [self reportScore:[[highScoreData objectForKey:@"HIGH_SCORE"] floatValue]
-                  forCategory:@"world_ranking"];            
+            [self reportScore:[[highScoreData objectForKey:@"HIGH_SCORE"] floatValue] * 100
+                  forCategory:@"world_ranking_25droids"];            
         }
     }
 }
