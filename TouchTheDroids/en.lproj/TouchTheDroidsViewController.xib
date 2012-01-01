@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">11A511</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<int key="IBDocument.SystemTarget">1280</int>
+		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">534</string>
+			<string key="NS.object.0">933</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -23,11 +23,8 @@
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys" id="0">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-			</object>
-			<reference key="dict.values" ref="0"/>
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -47,7 +44,7 @@
 					<object class="IBUIImageView" id="1017642545">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{-27, 369}, {116, 118}}</string>
+						<string key="NSFrame">{{0, 360}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="491501340"/>
@@ -57,7 +54,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">droid_green_rotate.png</string>
+							<string key="NSResourceName">tiwawa_white_rotate.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="203794005">
@@ -72,11 +69,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">36</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<string key="IBUINormalTitle">Start Game</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="663691228">
 							<int key="NSColorSpace">3</int>
@@ -94,6 +86,17 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">button_bg.png</string>
 						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">Helvetica-Bold</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">2</int>
+							<double key="pointSize">36</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">36</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUIButton" id="941924630">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -107,16 +110,22 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">24</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<string key="IBUINormalTitle">Game Center</string>
 						<reference key="IBUIHighlightedTitleColor" ref="663691228"/>
 						<reference key="IBUINormalTitleColor" ref="945215496"/>
 						<reference key="IBUINormalTitleShadowColor" ref="1068712051"/>
 						<reference key="IBUINormalBackgroundImage" ref="528142961"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">Helvetica-Bold</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">2</int>
+							<double key="pointSize">24</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">24</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUILabel" id="694519069">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -132,11 +141,6 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Touch the</string>
-						<object class="NSFont" key="IBUIFont" id="415512863">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">48</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -148,6 +152,17 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">2</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="974263875">
+							<string key="name">Helvetica</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">0</int>
+							<double key="pointSize">48</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="415512863">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">48</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUILabel" id="57984449">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -162,8 +177,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">droids</string>
-						<reference key="IBUIFont" ref="415512863"/>
+						<string key="IBUIText">Tiwawas</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -174,11 +188,13 @@
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">2</int>
 						<int key="IBUITextAlignment">2</int>
+						<reference key="IBUIFontDescription" ref="974263875"/>
+						<reference key="IBUIFont" ref="415512863"/>
 					</object>
 					<object class="IBUIImageView" id="996253821">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{139, 136}, {28, 39}}</string>
+						<string key="NSFrame">{{73, 136}, {39, 39}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="203794005"/>
@@ -188,7 +204,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">droid_green.png</string>
+							<string key="NSResourceName">tiwawa_white.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="402097169">
@@ -204,13 +220,13 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">droid_size_announce_green.png</string>
+							<string key="NSResourceName">tiwawa_size_announce_white.png</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="191248365">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{97, 439}, {239, 21}}</string>
+						<string key="NSFrame">{{84, 439}, {239, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -220,12 +236,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Touch the biggest size droid</string>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<string key="IBUIText">Touch the biggest size tiwawas</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -234,11 +245,22 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">Helvetica</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">0</int>
+							<double key="pointSize">17</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">17</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUIButton" id="491501340">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 350}, {92, 110}}</string>
+						<string key="NSFrame">{{0, 360}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="941924630"/>
@@ -247,17 +269,23 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<reference key="IBUIHighlightedTitleColor" ref="663691228"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1068712051"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">Helvetica-Bold</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
@@ -282,15 +310,6 @@
 					<int key="connectionID">7</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">startGameButtonTouchUpInside:</string>
-						<reference key="source" ref="203794005"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">droidLeftBottomImageView</string>
 						<reference key="source" ref="372490531"/>
@@ -307,13 +326,21 @@
 					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">changeDroidColorButtonDown:</string>
-						<reference key="source" ref="491501340"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">1</int>
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">showLeaderboardButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="941924630"/>
 					</object>
-					<int key="connectionID">24</int>
+					<int key="connectionID">26</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">startGameButtonTouchUpInside:</string>
+						<reference key="source" ref="203794005"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">16</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -325,12 +352,13 @@
 					<int key="connectionID">25</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">showLeaderboardButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="941924630"/>
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">changeDroidColorButtonDown:</string>
+						<reference key="source" ref="491501340"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">1</int>
 					</object>
-					<int key="connectionID">26</int>
+					<int key="connectionID">24</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -338,7 +366,9 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<reference key="object" ref="0"/>
+						<object class="NSArray" key="object" id="0">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -360,13 +390,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="694519069"/>
 							<reference ref="57984449"/>
-							<reference ref="996253821"/>
 							<reference ref="203794005"/>
 							<reference ref="941924630"/>
 							<reference ref="1017642545"/>
 							<reference ref="491501340"/>
 							<reference ref="402097169"/>
 							<reference ref="191248365"/>
+							<reference ref="996253821"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -572,18 +602,18 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>button_bg.png</string>
-				<string>droid_green.png</string>
-				<string>droid_green_rotate.png</string>
-				<string>droid_size_announce_green.png</string>
+				<string>tiwawa_size_announce_white.png</string>
+				<string>tiwawa_white.png</string>
+				<string>tiwawa_white_rotate.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{110, 63}</string>
-				<string>{450, 540}</string>
-				<string>{580, 592}</string>
 				<string>{640, 100}</string>
+				<string>{512, 512}</string>
+				<string>{512, 512}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">534</string>
+		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>

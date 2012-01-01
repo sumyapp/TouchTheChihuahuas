@@ -27,10 +27,10 @@
     _colorType = color;
     switch (color) {
         case droid_Green:
-            [self setImage:[UIImage imageNamed:@"droid_green.png"]];
+            [self setImage:[UIImage imageNamed:@"tiwawa_white.png"]];
             break;
         case droid_GColor:
-            [self setImage:[UIImage imageNamed:@"droid_gcolor.png"]];
+            [self setImage:[UIImage imageNamed:@"tiwawa_white.png"]];
             break;
         default:
             LOG(@"WARNING: this swich section not use");
@@ -48,7 +48,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self setImage:[UIImage imageNamed:@"droid_green.png"]];
+        [self setImage:[UIImage imageNamed:@"tiwawa_white.png"]];
         [self setUserInteractionEnabled:YES];
     }
     return self;

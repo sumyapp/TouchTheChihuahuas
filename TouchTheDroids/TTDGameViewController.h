@@ -7,8 +7,7 @@
 //
 
 #import "TTDDroidView.h"
-#define DROID_COUNT_MARGIN 5
-#define DROID_ASPECT_RATIO 1.20
+#define DROID_ASPECT_RATIO 1.0
 
 @interface TTDGameViewController : UIViewController<UIAlertViewDelegate, TTDDroidViewDelegate> {
     UILabel *_scoreLabel;

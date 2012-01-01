@@ -28,7 +28,7 @@
 
 - (void)saveHighScore {
     LOG_METHOD
-    NSMutableDictionary *highScoreDataSet = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *highScoreDataSet = [[[NSMutableDictionary alloc] init] autorelease];
     [highScoreDataSet setObject:[NSNumber numberWithBool:NO]
                          forKey:@"HIGH_SCORE_ALREADY_SEND"];
     [highScoreDataSet setObject:[NSNumber numberWithFloat:_gamePlayingTimeCount]
@@ -37,7 +37,7 @@
     
     // ファイルに保存
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:highScoreDataSet forKey:@"HIGH_SCORE_DATA_world_ranking_25droids"];
+    [defaults setObject:highScoreDataSet forKey:@"HIGH_SCORE_DATA_world_ranking_25robots"];
     [defaults synchronize];
 }
 
@@ -183,19 +183,19 @@
         
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *savedHighScore = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25droids"];
+        NSDictionary *savedHighScore = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25robots"];
         // ハイスコアが更新されてたら保存する
         if(savedHighScore == nil || [[savedHighScore objectForKey:@"HIGH_SCORE"] floatValue] >= _gamePlayingTimeCount) {
             // ハイスコアを保存
             [self saveHighScore];
             // ハイスコアおめでとうメッセージ
-            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore!", nil) message:NSLocalizedString(@"Successful. You destroyed all the droids!\nAnd, You got a new record!", nil) delegate:self
+            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!\nAnd, You got a new record!", nil) delegate:self
                                                   cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
             [alert show];
         }
         else {
             // クリアおめでとうメッセージ
-            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish!", nil) message:NSLocalizedString(@"Successful. You destroyed all the droids!", nil) delegate:self
+            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!", nil) delegate:self
                                                   cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
             [alert show];
         }
@@ -213,7 +213,6 @@
 
 - (void)droidDestroyMiss:(TTDDroidView*)droidView {
     LOG_METHOD
-    
     if(!_animatingDroidViews) {
         _animatingDroidViews = [[NSMutableArray alloc] init];
     }
@@ -242,13 +241,14 @@
     LOG_METHOD
     if(_animatingDroidViews && [_animatingDroidViews count] > 1) {
         TTDDroidView *droidView = [_animatingDroidViews objectAtIndex:0];
-        [_animatingDroidViews removeObjectAtIndex:0];
         [droidView setHidden:YES];
         [droidView removeFromSuperview];
+        [_animatingDroidViews removeObject:droidView];
     }
 }
 
 - (void)addDroid {
+    LOG_METHOD
     if(_droidViewsDic.count + _destroyedDroidCount >= _destroyNormDroidCount || !_gamePlayingTimeCountTimer) {
         return;
     }
@@ -257,7 +257,7 @@
     float droidWidth, droidHeight;
     do {
         droidWidth = rand() % 150;
-    } while (droidWidth < 25);
+    } while (droidWidth < 35 && droidWidth > 3);
     droidHeight = droidWidth * DROID_ASPECT_RATIO;
     
     // Droidの始点を8点のうちどこかを決定, それに合わせて目的地店とdroidの回転角度も設定
