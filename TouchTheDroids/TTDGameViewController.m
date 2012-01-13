@@ -191,13 +191,13 @@
             [self saveHighScore];
             // ハイスコアおめでとうメッセージ
             UIAlertView *alert =[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!\nAnd, You got a new record!", nil) delegate:self
-                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil];
+                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", @"Tweet", nil];
             [alert show];
         }
         else {
             // クリアおめでとうメッセージ
             UIAlertView *alert =[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!", nil) delegate:self
-                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil];
+                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", @"Tweet", nil];
             [alert show];
         }
         
@@ -309,13 +309,72 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     LOG_METHOD
+    BOOL sendTweet = NO;
     switch (buttonIndex) {
         case 1:
             [self startGameCountStart];
             break;
+        case 2:
+            sendTweet = YES;
+            break;
         default:
             [self dismissModalViewControllerAnimated:YES];
             break;
+    }
+    if(sendTweet) {
+        if (!TWTweetComposeViewController.canSendTweet) {
+            UIAlertView *alert =[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                           message:NSLocalizedString(@"cantsendtweet", nil)
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Close" otherButtonTitles:@"Retry(Play)", nil];
+            [alert show];
+            return;
+        }
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 320, 100)];
+        [label setFont:[UIFont systemFontOfSize:25]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setText:[NSString stringWithFormat:@"Destroy 25 Chihuahuas\n TimeScore:%@", _timeCountTextLabel.text]];
+        [label setNumberOfLines:2];
+        [label setTextAlignment:UITextAlignmentCenter];
+        [self.view addSubview:label];
+         
+        UIImage *dogImage = [UIImage imageNamed:@"tiwawa_white.png"];
+        UIImageView *dogImageView = [[UIImageView alloc] initWithImage:dogImage];
+        int dogSize = 180;
+        [dogImageView setFrame:CGRectMake(320-dogSize, 460-dogSize, dogSize, dogSize)];
+        [self.view addSubview:dogImageView];
+        
+        UIGraphicsBeginImageContext(self.view.bounds.size);
+        [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [dogImageView removeFromSuperview];
+        [label removeFromSuperview];
+        
+        
+        
+        TWTweetComposeViewController *twitterCtl = [[TWTweetComposeViewController alloc] init];
+        [twitterCtl setInitialText:NSLocalizedString(@"tweetInitialText", nil)];
+        twitterCtl.completionHandler = ^(TWTweetComposeViewControllerResult result)  {
+            [self dismissModalViewControllerAnimated:YES];
+            
+            switch (result) {
+                case TWTweetComposeViewControllerResultCancelled:
+                    break;
+                    
+                case TWTweetComposeViewControllerResultDone:
+                    break;
+                    
+                default:
+                    break;
+            }
+            [alertView show];
+        };
+        [twitterCtl addImage:image];
+        [self presentModalViewController:twitterCtl animated:YES];        
     }
 }
 

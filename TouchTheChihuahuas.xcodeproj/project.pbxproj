@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC4D26A014C04DC40085ABB4 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC4D269F14C04DC40085ABB4 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AC4D26A414C0506B0085ABB4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC4D26A214C050640085ABB4 /* QuartzCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AC94A4AA13E5B96B0095CDE6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94A4A913E5B96B0095CDE6 /* Default@2x.png */; };
 		AC94A4AD13E5B96D0095CDE6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AC94A4AC13E5B96D0095CDE6 /* Default.png */; };
 		ACDFAB6113E5A9EE00129D83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACDFAB6313E5A9EE00129D83 /* Localizable.strings */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		AC1814B213F6A8120054523E /* ja */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 10; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AC4D269F14C04DC40085ABB4 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		AC4D26A214C050640085ABB4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AC94A4A913E5B96B0095CDE6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		AC94A4AC13E5B96D0095CDE6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		ACDFAB6213E5A9EE00129D83 /* en */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 10; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC4D26A414C0506B0085ABB4 /* QuartzCore.framework in Frameworks */,
+				AC4D26A014C04DC40085ABB4 /* Twitter.framework in Frameworks */,
 				ACF6B65713E555B0007F155C /* GameKit.framework in Frameworks */,
 				ACED19BF13DC444C0004D01E /* UIKit.framework in Frameworks */,
 				ACED19C113DC444C0004D01E /* Foundation.framework in Frameworks */,
@@ -108,6 +114,8 @@
 		ACED19BD13DC444C0004D01E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC4D26A214C050640085ABB4 /* QuartzCore.framework */,
+				AC4D269F14C04DC40085ABB4 /* Twitter.framework */,
 				ACF6B65513E555A7007F155C /* GameKit.framework */,
 				ACED19BE13DC444C0004D01E /* UIKit.framework */,
 				ACED19C013DC444C0004D01E /* Foundation.framework */,
@@ -316,7 +324,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1AA0C6EC-913D-490D-BC20-B69505F5CB5C";
 				SDKROOT = iphoneos;
 			};
@@ -337,7 +345,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09338AB5-5DC3-4B71-AB2B-A93DD1BE6067";
 				SDKROOT = iphoneos;
@@ -353,7 +361,7 @@
 				GCC_PREFIX_HEADER = "TouchTheDroids/TouchTheChihuahuas-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TouchTheDroids/TouchTheTiwawas-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = TouchTheChihuahuas;
 				WRAPPER_EXTENSION = app;
 			};
@@ -367,7 +375,7 @@
 				GCC_PREFIX_HEADER = "TouchTheDroids/TouchTheChihuahuas-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TouchTheDroids/TouchTheTiwawas-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = TouchTheChihuahuas;
 				WRAPPER_EXTENSION = app;
 			};

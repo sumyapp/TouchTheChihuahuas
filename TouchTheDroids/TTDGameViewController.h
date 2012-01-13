@@ -7,6 +7,8 @@
 //
 
 #import "TTDDroidView.h"
+#import <QuartzCore/QuartzCore.h>
+#import <Twitter/Twitter.h>
 #define DROID_ASPECT_RATIO 1.0
 #define DROID_MINIUM_WIDTH 30
 
