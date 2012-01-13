@@ -56,7 +56,6 @@
 
 - (void)dealloc {
     LOG_METHOD
-    [super dealloc];
 }
 
 /*

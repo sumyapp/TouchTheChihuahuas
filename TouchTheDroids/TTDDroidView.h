@@ -17,12 +17,12 @@ enum {
 @interface TTDDroidView : UIImageView {
     int _colorType;
     int number;
-    id delegate;
+    id __unsafe_unretained delegate;
 }
 - (NSString*)description;
 @property (nonatomic) int colorType;
 @property int number;
-@property (assign, readwrite) id delegate;
+@property (unsafe_unretained, readwrite) id delegate;
 @end
 
 @protocol TTDDroidViewDelegate

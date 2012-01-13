@@ -16,7 +16,7 @@
 - (void)destroyDroid:(TTDDroidView*)droidView;
 - (void)droidDestroySuccess:(TTDDroidView*)droidView;
 - (void)droidDestroyMiss:(TTDDroidView*)droidView;
-- (void)droidDestroyAnimationDidEnd;
+- (void)droidDestroyAnimationDidEnd:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 - (void)addDroid;
 - (void)saveHighScore;
 @end
@@ -28,7 +28,7 @@
 
 - (void)saveHighScore {
     LOG_METHOD
-    NSMutableDictionary *highScoreDataSet = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary *highScoreDataSet = [[NSMutableDictionary alloc] init];
     [highScoreDataSet setObject:[NSNumber numberWithBool:NO]
                          forKey:@"HIGH_SCORE_ALREADY_SEND"];
     [highScoreDataSet setObject:[NSNumber numberWithFloat:_gamePlayingTimeCount]
@@ -37,7 +37,7 @@
     
     // ファイルに保存
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:highScoreDataSet forKey:@"HIGH_SCORE_DATA_world_ranking_25robots"];
+    [defaults setObject:highScoreDataSet forKey:@"HIGH_SCORE_DATA_world_ranking_25chihuahuas"];
     [defaults synchronize];
 }
 
@@ -154,15 +154,16 @@
 
 - (void)droidDestroySuccess:(TTDDroidView*)droidView {
     LOG_METHOD    
-    if(!_animatingDroidViews) {
-        _animatingDroidViews = [[NSMutableArray alloc] init];
+    if(!_animatingDroidViewsDic) {
+        _animatingDroidViewsDic = [[NSMutableDictionary alloc] init];
     }
-    [_animatingDroidViews addObject:droidView];
+    [_animatingDroidViewsDic setObject:droidView forKey:[NSString stringWithFormat:@"%d", droidView.number]];
+
     CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
+    [UIView beginAnimations:[NSString stringWithFormat:@"%d", droidView.number] context:context];
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(droidDestroyAnimationDidEnd)];
+    [UIView setAnimationDidStopSelector:@selector(droidDestroyAnimationDidEnd:finished:context:)];
     CGAffineTransform rotate = CGAffineTransformMakeRotation(180.f * (M_PI / 180.0f));
     CGAffineTransform scale = CGAffineTransformMakeScale(0.001, 0.001);
     CGAffineTransform concat = CGAffineTransformConcat(rotate, scale);
@@ -183,27 +184,27 @@
         
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *savedHighScore = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25robots"];
+        NSDictionary *savedHighScore = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25chihuahuas"];
         // ハイスコアが更新されてたら保存する
         if(savedHighScore == nil || [[savedHighScore objectForKey:@"HIGH_SCORE"] floatValue] >= _gamePlayingTimeCount) {
             // ハイスコアを保存
             [self saveHighScore];
             // ハイスコアおめでとうメッセージ
-            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!\nAnd, You got a new record!", nil) delegate:self
-                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
+            UIAlertView *alert =[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Highscore!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!\nAnd, You got a new record!", nil) delegate:self
+                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil];
             [alert show];
         }
         else {
             // クリアおめでとうメッセージ
-            UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!", nil) delegate:self
-                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil] autorelease];
+            UIAlertView *alert =[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Finish!", nil) message:NSLocalizedString(@"Successful. You destroyed all the robots!", nil) delegate:self
+                                                  cancelButtonTitle:@"Close" otherButtonTitles:@"Retry", nil];
             [alert show];
         }
         
         for (NSNumber *droidViewKey in _droidViewsDic) {
             [[_droidViewsDic objectForKey:droidViewKey] removeFromSuperview];
         }
-        [_droidViewsDic release], _droidViewsDic = nil;
+        _droidViewsDic = nil;
     }
     else {
         // ドロイド追加
@@ -213,15 +214,16 @@
 
 - (void)droidDestroyMiss:(TTDDroidView*)droidView {
     LOG_METHOD
-    if(!_animatingDroidViews) {
-        _animatingDroidViews = [[NSMutableArray alloc] init];
+    if(!_animatingDroidViewsDic) {
+        _animatingDroidViewsDic = [[NSMutableDictionary alloc] init];
     }
-    [_animatingDroidViews addObject:droidView];
+    [_animatingDroidViewsDic setObject:droidView forKey:[NSString stringWithFormat:@"%d", droidView.number]];
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
+    [UIView beginAnimations:[NSString stringWithFormat:@"%d", droidView.number] context:context];
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(droidDestroyAnimationDidEnd)];
+    [UIView setAnimationDidStopSelector:@selector(droidDestroyAnimationDidEnd:finished:context:)];
     CGAffineTransform rotate = CGAffineTransformMakeRotation(45.f * (M_PI / 180.0f));
     CGAffineTransform scale = CGAffineTransformMakeScale(0.5, 0.5);
     CGAffineTransform concat = CGAffineTransformConcat(rotate, scale);
@@ -237,19 +239,23 @@
     [NSTimer scheduledTimerWithTimeInterval:_missDroidDestroyPenalty target:self selector:@selector(addDroid) userInfo:nil repeats:NO];
 }
 
-- (void)droidDestroyAnimationDidEnd {
+- (void)droidDestroyAnimationDidEnd:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     LOG_METHOD
-    if(_animatingDroidViews && [_animatingDroidViews count] > 1) {
-        TTDDroidView *droidView = [_animatingDroidViews objectAtIndex:0];
+    if(_animatingDroidViewsDic && [_animatingDroidViewsDic count] > 1) {
+        TTDDroidView *droidView = [_animatingDroidViewsDic objectForKey:animationID];
         [droidView setHidden:YES];
         [droidView removeFromSuperview];
-        [_animatingDroidViews removeObject:droidView];
+        [_animatingDroidViewsDic removeObjectForKey:animationID];
     }
 }
 
 - (void)addDroid {
     LOG_METHOD
     if(_droidViewsDic.count + _destroyedDroidCount >= _destroyNormDroidCount || !_gamePlayingTimeCountTimer) {
+        LOG(@"_droidViewsDic:%@", [_droidViewsDic description]);
+        if(_animatingDroidViewsDic) {
+            LOG(@"_animatingDroidViewsDic:%@", [_animatingDroidViewsDic description]);
+        }
         return;
     }
     
@@ -257,7 +263,7 @@
     float droidWidth, droidHeight;
     do {
         droidWidth = rand() % 150;
-    } while (droidWidth < 35 && droidWidth > 3);
+    } while (droidWidth < DROID_MINIUM_WIDTH);
     droidHeight = droidWidth * DROID_ASPECT_RATIO;
     
     // Droidの始点を8点のうちどこかを決定, それに合わせて目的地店とdroidの回転角度も設定
@@ -268,6 +274,9 @@
     do {
         droidPosY = rand() % 460;
     } while (droidPosY + droidHeight > 460);
+    
+    // Droidを追加したことを変数に保存
+    _apperdDroidCount = _apperdDroidCount + 1;
     
     // Droidのインスタンス化、設定設定
     TTDDroidView *droidView = [[TTDDroidView alloc] initWithFrame:CGRectMake(droidPosX, droidPosY, droidWidth, droidHeight)];
@@ -280,12 +289,8 @@
     if(!_droidViewsDic) {
         _droidViewsDic = [[NSMutableDictionary alloc] init];
     }
-    [_droidViewsDic setObject:droidView forKey:[NSNumber numberWithInt:_apperdDroidCount]];
+    [_droidViewsDic setObject:droidView forKey:[NSNumber numberWithInt:droidView.number]];
     [self.view addSubview:droidView];
-    [droidView release];
-    
-    // Droidを追加したことを変数に保存
-    _apperdDroidCount = _apperdDroidCount + 1;
     
     //アニメーションの対象となるコンテキスト
    CGContextRef context = UIGraphicsGetCurrentContext();
@@ -391,12 +396,7 @@
 
 - (void)dealloc {
     LOG_METHOD
-    [super dealloc];
     
-    [_scoreLabel release];
-    [_textLabel release];
-    [_timeCountTextLabel release];
-    [_droidViewsDic release];
 }
 
 @end

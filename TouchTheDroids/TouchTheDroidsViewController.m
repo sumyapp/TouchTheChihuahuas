@@ -12,7 +12,7 @@
 
 - (void)reportScore:(float)score forCategory:(NSString*)category
 { 
-    GKScore *scoreReporter = [[[GKScore alloc] initWithCategory:category] autorelease];
+    GKScore *scoreReporter = [[GKScore alloc] initWithCategory:category];
     scoreReporter.value = score;
     [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
         if (error != nil)
@@ -21,7 +21,7 @@
             LOG(@"ERROR MESSAGE");
         } else {
             LOG(@"MAYBE OK");//console に"多分OK"を出力
-            NSMutableDictionary *highScoreDataSet = [[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"HIGH_SCORE_DATA_%@", category]]] autorelease];
+            NSMutableDictionary *highScoreDataSet = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"HIGH_SCORE_DATA_%@", category]]];
             if(highScoreDataSet != nil) {
                 // 未送信の最高スコアがあれば、それを送信する。
                 if(![highScoreDataSet objectForKey:@"HIGH_SCORE_ALREADY_SEND"]) {
@@ -35,7 +35,6 @@
 
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
     [self dismissModalViewControllerAnimated: YES];
-    [viewController release];
 }
 
 - (BOOL)isGameCenterAPIAvailable {
@@ -92,7 +91,7 @@
 
 - (IBAction)startGameButtonTouchUpInside:(id)sender {
     LOG_METHOD
-    TTDGameViewController *ttdGameViewController = [[[TTDGameViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    TTDGameViewController *ttdGameViewController = [[TTDGameViewController alloc] initWithNibName:nil bundle:nil];
     [ttdGameViewController setDestroyNormDroidCount:25];
     [ttdGameViewController setMissDroidDestroyPenalty:2.25];
     [ttdGameViewController setColorType:_colorType];
@@ -129,12 +128,12 @@
     LOG_METHOD
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *highScoreData = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25robots"];
+    NSDictionary *highScoreData = [defaults objectForKey:@"HIGH_SCORE_DATA_world_ranking_25chihuahuas"];
     if(highScoreData != nil) {
         // 未送信の最高スコアがあれば、それを送信する。
         if(![[highScoreData objectForKey:@"HIGH_SCORE_ALREADY_SEND"] boolValue]) {
             [self reportScore:[[highScoreData objectForKey:@"HIGH_SCORE"] floatValue] * 100
-                  forCategory:@"world_ranking_25robots"];            
+                  forCategory:@"world_ranking_25chihuahuas"];            
         }
     }
 }

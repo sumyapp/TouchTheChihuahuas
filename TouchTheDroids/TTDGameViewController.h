@@ -8,6 +8,7 @@
 
 #import "TTDDroidView.h"
 #define DROID_ASPECT_RATIO 1.0
+#define DROID_MINIUM_WIDTH 30
 
 @interface TTDGameViewController : UIViewController<UIAlertViewDelegate, TTDDroidViewDelegate> {
     UILabel *_scoreLabel;
@@ -21,7 +22,7 @@
     float _gamePlayingTimeCount;
     NSTimer *_gamePlayingTimeCountTimer;
     NSMutableDictionary *_droidViewsDic;
-    NSMutableArray *_animatingDroidViews;
+    NSMutableDictionary *_animatingDroidViewsDic;
     
     int _colorType;
     int _destroyNormDroidCount;
